@@ -204,22 +204,17 @@
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product/{{$produit->id}}"><img src="{{$produit->image}}" alt=""></a>
+							<a href="single-product/{{$produit->id}}"><img src="{{$produit->image}}" alt="image du produit" style="width:200px; height:200px;"></a>
 						</div>
 						<h3>{{$produit->nom}}</h3>
 						<p class="product-price">{{$produit->prix}} XOF</p>
-						<p class="#">{{$produit->categorie->nom}}</p>
+						<p class="#">{{$produit->categorie->nom ?? 'Categorie supprimée'}}</p>
 						<a href="#" class="cart-btn"><i class="fas fa-shopping-cart"></i> Acheter !</a>
 					</div>
 				</div>
 				@endforeach
-	            {{$produits->links()}}
-
 				</div>
-				<div >
-					<a class="nav-link" href="login">Connexion</a>
-                    <a class="cart-btn" href="register">Inscription</a>
-				</div>
+				<div class="d-flex justify-content-center">{{$produits->links()}} </div>
 			</div>
 		</div>
 	</div>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Categorie;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
 class CategorieController extends Controller
 {
     public function index(){
@@ -19,17 +21,15 @@ class CategorieController extends Controller
             "nom"=> $request->nom
         );
         Categorie::create($request);
-        return back()->with("success","La catégorie a été ajouté avec succès!");
+        return Redirect::to('home')->with("success","La catégorie a été ajouté avec succès!");
      }
 
 
      public function supprimer(Categorie $categorie){
-        // dd($id);
-        // Categorie::find($id)->delete();
         $categorie->delete();
-        return back()->with("successSuppress","La catégorie été supprimé !");
+        return Redirect::to('home')->with("successSuppress","La catégorie été supprimé !");
     }
-    public function recherche(Request $request){
+    public function reach(Request $request){
         $search=$request['search']?? "" ;
          if ($search != ""){
             $categories=Categorie::where('nom','LIKE',$search)->get();
@@ -38,7 +38,7 @@ class CategorieController extends Controller
             $categories=Categorie::all();
         }
         $data = compact('categories','search');
-        return view('createcategorie')->with($data);
+        return view('reach-view')->with($data);
     }
     
 }

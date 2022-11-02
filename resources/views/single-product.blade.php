@@ -7,7 +7,7 @@
 			<div class="row">
 				<div class="col-md-5">
 					<div class="single-product-img">
-						<img src="{{$produit->image}}" alt="">
+						<img src="{{$produit->image}}" style="width:300px; height:300px;">
 					</div>
 				</div>
 				<div class="col-md-7">
@@ -15,9 +15,10 @@
 						<h3>{{$produit->nom}}</h3>
 						<p class="single-product-pricing"><span>{{$produit->prix}} XOF</span></p>
 						<p>{{$produit->details}}</p>
+						<p><strong>Catégorie: </strong>{{$produit->categorie->nom ?? 'Categorie supprimée'}}</p>
 						<div class="single-product-form">
 							<a href="#" class="cart-btn"><i class="fas fa-shopping-cart"></i> Acheter </a>
-							<p><strong>Catégorie: </strong>{{$produit->categorie->nom}}</p>
+							<a href="/" class="danger-btn"> Annuler </a>
 						</div>
 					</div>
 				</div>

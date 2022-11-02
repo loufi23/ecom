@@ -12,9 +12,9 @@
 	<div class="product-section mt-150 mb-150">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="col text-center">
 					<div class="section-title">	
-						<h3><span class="orange-text">Liste</span> de recherche pour "{{$search}}" </h3>
+						<h3><span class="orange-text">Liste</span> de resultats pour "{{$search}}" </h3>
 					</div>
 				</div>
 			</div>
@@ -35,6 +35,8 @@
 				@endforeach
 	            {{$produits->links()}}
 				</div>
+				<a href="/" class="danger-btn">Retour</a>
+
 			</div>
 		</div>
 	</div>

@@ -17,12 +17,6 @@ class ProduitController extends Controller
     }
 
 
-    public function ListForAdmin(){
-        $produits = Produit::orderBy("created_at","desc")->get();
-        return view ("home",compact("produits"));
-    }
-
-
     public function details($id){
         $produit= Produit::find($id);
         
@@ -35,7 +29,7 @@ class ProduitController extends Controller
     
     public function create(){
         $categories = Categorie::all();
-        return view ("createproduit",compact("categories"));
+        return view ("form",compact("categories"));
     }
 
 
@@ -66,13 +60,13 @@ class ProduitController extends Controller
         );
 
         Produit::create($produit);
-        return back()->with("success","Le produit a été ajouté avec succès!");
+        return Redirect::to('home')->with("success","Le produit a été ajouté avec succès!");
     }
 
 
     public function destroy(Produit $produit){
         $produit->delete();
-        return back()->with("successDelete","Le produit $produit->nom a été supprimé !");
+        return Redirect::to('home')->with("successDelete","Le produit a été supprimé !");
     }
 
 
@@ -102,7 +96,7 @@ class ProduitController extends Controller
             "categorie_id"=>$request->categorie_id
 
         ]);        
-        return Redirect::to('home')->with("success","Le produit a été modifié avec succès!");
+        return Redirect::to('home')->with("successM","Le produit a été modifié avec succès!");
     }
     public function edit(Produit $produit){
         $categories = Categorie::all();
@@ -111,8 +105,7 @@ class ProduitController extends Controller
     public function recherche(Request $request){
         $search=$request['search']?? "" ;
          if ($search != ""){
-            $produits=Produit::where('nom','LIKE',$search)->paginate(12);
-            
+            $produits=Produit::where('nom','LIKE',$search)->paginate(12);  
         }
         else{
             $Produits=Produit::all();
