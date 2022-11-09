@@ -64,14 +64,14 @@
                         <div class="bg-secondary rounded h-100 p-4">
                             <h6 class="mb-4">Ajouter un produit</h6>
                             @if($errors->any())
-                            <div class="alert alert-succes">
-                                <ul> 
-                                    @foreach($errors->all() as $error)	
-                                    <li>{{$error}}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+                                <div class="alert alert-succes">
+                                    <ul> 
+                                        @foreach($errors->all() as $error)	
+                                        <li>{{$error}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <form  method="post" action="{{route('produit.ajouter')}}" enctype="multipart/form-data">
 		                        @csrf
                                 <div class="mb-3">
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="text" class="form-label" >Prix du produit</label>
-                                    <input type="text" name="prix" class="form-control"  placeholder="Produit" required>
+                                    <input type="text" name="prix" class="form-control"  placeholder="Prix" required>
                                 </div>
                                 <div class="mb-3">
                                     <strong>Catégorie: </strong>

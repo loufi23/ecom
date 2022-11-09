@@ -105,7 +105,7 @@ class ProduitController extends Controller
     public function recherche(Request $request){
         $search=$request['search']?? "" ;
          if ($search != ""){
-            $produits=Produit::where('nom','LIKE',$search)->paginate(12);  
+            $produits=Produit::where('nom','LIKE',"%$search%")->paginate(12);  
         }
         else{
             $Produits=Produit::all();

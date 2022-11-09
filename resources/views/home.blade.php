@@ -19,8 +19,10 @@
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="home" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="form" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Gestion</a>
-                    <a href="table" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Utilisateurs</a>
+                    <a href="form" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>liste des Produits</a>
+                    <a href="table" class="nav-item nav-link"><i class="fa fa-table me-2"></i>liste des Catégories</a>
+                    <a href="table" class="nav-item nav-link"><i class="fa fa-table me-2"></i>liste des Catégories</a>
+
                 </div>
             </nav>
         </div>
@@ -62,12 +64,8 @@
                             <h4 class="mb-4 text-center"> <strong> Liste des Catégories</strong></h4>
                             <form action="{{route('cate.search')}}" method="post">
                                 @csrf
-                                <div class="col-sm-4 col-xl-3" >
-                                    <input class="form-control" type="search" name="search" id="search" placeholder="Rechercher un produit" value="">
-                                </div>
-                                <div class="col-sm-4 col-xl-3">
-                                    <button class="input-group-text" type="submit"><i class="fas fa-search"></i></button>
-                                </div>
+                                <input class="form-control" type="search" name="reach" id="reach" placeholder="Rechercher une catégorie" value="">
+                                <button class="input-group-text" type="submit"><i class="fas fa-search"></i></button>
                             </form>
                                 @if('session()->has(successSuppress)')
                                 {{session()->get('successSuppress')}}
@@ -107,7 +105,7 @@
                                         <p class="">{{$produit->prix}} XOF</p> 
                                         <p class="">{{$produit->categorie->nom ?? 'Categorie supprimée'}}</p>
                                         <a href="{{route('produit.edit',['produit'=>$produit->id])}}" class="">Modifier</a>
-                                        <a href="#" class="btn btn-primary" onclick="if(confirm('Voulez vous vraiment supprimer ce produit?')){document.getElementById('form-{{$produit->id}}').submit()}"><i class=""></i>Supprimer</a>
+                                        <a href="#" class="btn btn-primary" onclick="if(confirm('Voulez vous vraiment supprimer ce produit?')){document.getElementById('form-{{$produit->id}}').submit()}">Supprimer</a>
                                         <form id="form-{{$produit->id}}" action="{{route('produit.destroy',['produit'=>$produit->id])}}" method="post">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete">

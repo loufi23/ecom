@@ -65,7 +65,7 @@ h5:last-child, .h5:last-child,
 h6:last-child, .h6:last-child {
   margin: 0;
 }
-
+ 
 h1, .h1 {
   font-size: 4rem;
   font-weight: 700;
@@ -1245,7 +1245,7 @@ a.cart-btn ,a.danger-btn{
 
 a.cart-btn:hover {
   background-color: #051922;
-  color: #F28123;
+  color:#b5ada6;
 }
 a.danger-btn:hover {
   background-color: #051922;

@@ -24,7 +24,7 @@
 				<div class="col-lg-4 col-md-6 text-center">
 					<div class="single-product-item">
 						<div class="product-image">
-							<a href="single-product/{{$produit->id}}"><img src="{{$produit->image}}" alt=""></a>
+							<a href="single-product/{{$produit->id}}"><img src="{{$produit->image}}" alt="Image du produit"></a>
 						</div>
 						<h3>{{$produit->nom}}</h3>
 						<p class="product-price">{{$produit->prix}} XOF</p>

@@ -18,7 +18,7 @@
 						<p><strong>Catégorie: </strong>{{$produit->categorie->nom ?? 'Categorie supprimée'}}</p>
 						<div class="single-product-form">
 							<a href="#" class="cart-btn"><i class="fas fa-shopping-cart"></i> Acheter </a>
-							<a href="/" class="danger-btn"> Annuler </a>
+							<a href="/" class="danger-btn">Retour </a>
 						</div>
 					</div>
 				</div>

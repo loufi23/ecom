@@ -53,19 +53,19 @@
                 </div>
             </nav>
             <!-- Navbar End -->
-<div class="container-fluid pt-4 px-4">
+            <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Resultats de recherches pour " {{$search}} " </h6>
+                        <h6 class="mb-0">Resultats de recherches pour " {{$reach}} " </h6>
                     </div>
-                    <div class="table-responsive">
                         @foreach($categories as $categorie)
                             <ul>
-                                {{$categorie->nom}} 
+                                <li>{{$categorie->nom}} </li>
                             </ul>
                         @endforeach
-                    </div>
+                    <a class="text-center" href="home" class="danger-btn">Retour</a>
                 </div>
             </div>
+				
             <!-- Recent Sales End -->
 @endsection('content')

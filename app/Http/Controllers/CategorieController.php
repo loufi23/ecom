@@ -30,14 +30,14 @@ class CategorieController extends Controller
         return Redirect::to('home')->with("successSuppress","La catégorie été supprimé !");
     }
     public function reach(Request $request){
-        $search=$request['search']?? "" ;
-         if ($search != ""){
-            $categories=Categorie::where('nom','LIKE',$search)->get();
+        $reach=$request['reach']?? "" ;
+         if ($reach != ""){
+            $categories=Categorie::where('nom','LIKE',"%$reach%")->get();
         }
         else{
             $categories=Categorie::all();
         }
-        $data = compact('categories','search');
+        $data = compact('categories','reach');
         return view('reach-view')->with($data);
     }
     
