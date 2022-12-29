@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Produit;
 use App\Models\Categorie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use phpDocumentor\Reflection\DocBlock\Tag;
 
 class ProduitController extends Controller
 {
@@ -14,6 +16,13 @@ class ProduitController extends Controller
         $produits = Produit::orderBy("created_at","desc")->paginate(12);
         
        return view ("welcome",compact("produits"));
+    }
+    public function listforadmin()
+    {
+        $produits = Produit::orderBy("created_at","desc")->paginate(10);
+        $categories = Categorie::all();
+        $produit= new Produit();
+        return view ("pages.produits.index",compact('produits','categories','produit'));
     }
 
 
@@ -26,12 +35,7 @@ class ProduitController extends Controller
         }
         return view ("single-product", ['produit' => $produit] );
     }
-    
-    public function create(){
-        $categories = Categorie::all();
-        return view ("form",compact("categories"));
-    }
-
+  
 
     public function store(Request $request)
     {
@@ -39,7 +43,7 @@ class ProduitController extends Controller
             "nom"=>"required",
             "prix"=>"required",
             "details"=>"required",
-            "image"=>"required|image|mimes:jpeg,png,jpg,gif,svg,webp",
+            "image"=>"required|image|mimes:jpeg,png,jpg",
             "categorie_id"=>"required"
         ]);
         if($request->hasfile('image'))
@@ -58,15 +62,14 @@ class ProduitController extends Controller
             "image"=> "uploads/$filename",
             "categorie_id"=> $request->categorie_id
         );
-
         Produit::create($produit);
-        return Redirect::to('home')->with("success","Le produit a été ajouté avec succès!");
+        return Redirect::to('pages.produits.index')->with("success","Le produit a été ajouté avec succès!");
     }
 
 
     public function destroy(Produit $produit){
         $produit->delete();
-        return Redirect::to('home')->with("successDelete","Le produit a été supprimé !");
+        return Redirect::to('pages.produits.index')->with("successDelete","Le produit a été supprimé !");
     }
 
 
@@ -76,7 +79,7 @@ class ProduitController extends Controller
             "nom"=>"required",
             "prix"=>"required",
             "details"=>"required",
-            "image"=>"required|image|mimes:jpeg,png,jpg,gif,svg,webp,jfif",
+            "image"=>"required|image|mimes:jpeg,png,jpg",
             "categorie_id"=>"required"
         ]);
         if($request->hasfile('image'))
@@ -96,22 +99,36 @@ class ProduitController extends Controller
             "categorie_id"=>$request->categorie_id
 
         ]);        
-        return Redirect::to('home')->with("successM","Le produit a été modifié avec succès!");
-    }
-    public function edit(Produit $produit){
-        $categories = Categorie::all();
-        return view ("editproduit",compact("produit","categories"));
+        return Redirect::to('pages.produits.index')->with("successM","Le produit a été modifié avec succès!");
     }
     public function recherche(Request $request){
         $search=$request['search']?? "" ;
          if ($search != ""){
-            $produits=Produit::where('nom','LIKE',"%$search%")->paginate(12);  
+            $produits=Produit::where('nom','LIKE',"%$search%")->paginate(10);  
         }
         else{
-            $Produits=Produit::all();
+            $produits=Produit::all();
         }
         $data = compact('produits','search');
         return view('search-view')->with($data);
     }
+    public function rechercheAdmin(Request $request){
+        $mot=$request['mot'] ?? "" ;
+        // $data=DB::table('produits')->get();
+    
+
+         if ($mot != ""){
+            
+             $produits = Produit::where('nom','LIKE',"%$mot%")
+             ->where('produits->categorie->nom','LIKE',"%$mot%")->paginate(10) ;
+           
+        }
+        else{
+            $produits=Produit::all();
+        }
+        $data = compact('produits','mot');
+        return view('adminsearch-view')->with($data);
+    }
+
 
 }

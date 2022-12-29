@@ -18,7 +18,6 @@ class CategoriesTableSeeder extends Seeder
             ["nom"=>"fruits"],
             ["nom"=>"Legumes"],
             ["nom"=>"cosmetiques"],
-            ["nom"=>"epices"],
-        ]);
+            ["nom"=>"epices"],]);
     }
 }

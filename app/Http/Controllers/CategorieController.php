@@ -10,8 +10,9 @@ class CategorieController extends Controller
 {
     public function index(){
         $categories = Categorie::orderBy("created_at","desc")->get();
-        return view ("createcategorie",compact("categories"));
+        return view ("pages.categories.index",compact("categories"));
     }
+    
     public function add(Request $request){
         $request->validate([
             "nom"=>"required"
@@ -21,13 +22,13 @@ class CategorieController extends Controller
             "nom"=> $request->nom
         );
         Categorie::create($request);
-        return Redirect::to('home')->with("success","La catégorie a été ajouté avec succès!");
+        return Redirect::to('pages.categories.index')->with("success","La catégorie a été ajouté avec succès!");
      }
 
 
      public function supprimer(Categorie $categorie){
         $categorie->delete();
-        return Redirect::to('home')->with("successSuppress","La catégorie été supprimé !");
+        return Redirect::to('pages.categories.index')->with("successSuppress","La catégorie été supprimé !");
     }
     public function reach(Request $request){
         $reach=$request['reach']?? "" ;
@@ -40,5 +41,8 @@ class CategorieController extends Controller
         $data = compact('categories','reach');
         return view('reach-view')->with($data);
     }
-    
+
+      
+
+
 }
